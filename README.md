@@ -404,14 +404,21 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 ***Questions:***
 
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Users and__.
+1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Both users and groups are codespace__.
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
 sudo chown -R codespace:codespace myroot
 
 ```
-*** __Fill answer here__.***
+```bash
+@onnienienie ➜ /workspaces/NatSysProject (main) $ sudo chown -R codespace:codespace myroot
+@onnienienie ➜ /workspaces/NatSysProject (main) $ ls -l
+total 32
+-rw-rw-rw-  1 codespace root      22315 May 28 07:05 README.md
+drwxrwxrwx+ 2 codespace root       4096 May 21 01:43 images
+drwxrwxrwx+ 2 codespace codespace  4096 May 27 14:22 myroot
+```
 
 ## You are on your own, create your own static webpage
 
@@ -438,11 +445,10 @@ docker run --detach -v /workspaces/OSProject/webpage:/usr/local/apache2/htdocs/ 
 ***Questions:***
 
 1. What is the permission of folder /usr/local/apache/htdocs and what user and group owns the folder? . ***(2 mark)*** __Fill answer here__.
-2. What port is the apache web server running. ***(1 mark)***
-3. What port is open for http protocol on the host machine? ***(1 mark)***
+2. What port is the apache web server running. _80_
+3. What port is open for http protocol on the host machine? _8080_
 
-## Create SUB Networks
-
+## Create SUB Network
 1. In docker, you can create your own private networks where you can run multiple services, in this part, we will create two networks, one called bluenet and the other is rednet
 2. Run the docker create network to create you networks like the ones below
 ```bash
@@ -458,11 +464,22 @@ docker run -itd --net rednet --name c2 busybox sh
 ```
 ***Questions:***
 
-1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** __Fill answer here__.
+1. Describe what is busybox and what is command switch **--name** is for? . ***(2 mark)*** __BusyBox is a lightweight executable that combines many common Unix utilities. The --name switch assigns a user-defined name to the container for easier reference__.
 2. Explore the network using the command ```docker network ls```, show the output of your terminal. ***(1 mark)***
-3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)***
-4. What is the network address for the running container c1 and c2.
+```bash
+@onnienienie ➜ /workspaces/NatSysProject (main) $ docker network ls
+NETWORK ID     NAME      DRIVER    SCOPE
+fd5163e234f0   bluenet   bridge    local
+eeeb7dd8b867   bridge    bridge    local
+6945fe4f425f   host      host      local
+5676d349a165   none      null      local
+95a19a074259   rednet    bridge    local
+```
+3. Using ```docker inspect c1``` and ```docker inspect c2``` inscpect the two network. What is the gateway of bluenet and rednet.? ***(1 mark)*** __Gateway of Bluenet:172.18.0.1__ __ Gateway of rednet:172.19.0.1__
+4. What is the network address for the running container c1 and c2. __Network address c1: 172.18.0.2 (bluenet)__ __Network address c2: 172.19.0.2 (rednet)__
 5. Using the command ```docker exec c1 ping c2```, which basically issue a ping from container c1 to c2. Are you able to ping? Show your output . ***(1 mark)***
+__no,since they are on different network they cannot communicate directly. 
+Output: ping: bad address 'c2'__
 
 ## Bridging two SUB Networks
 1. Let's try this again by creating a network to bridge the two containers in the two subnetworks
