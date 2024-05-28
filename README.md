@@ -56,8 +56,8 @@ Team Mates:
 
 ***Questions:***
 
-1. What is default OS used to run the virtual environment for codespaces. ***(1 mark)*** Ubuntu Linux.
-2. What are the two options of RAM, disk and vcpu configuration you can have in running codespaces . ***(1 mark)*** 1. 8GB RAM, 2 Cores and 32GB Storage.  2. 16GB RAM, 4 Cores and 32 GB Storage.
+1. What is default OS used to run the virtual environment for codespaces. ***(1 mark)*** __Ubuntu Linux___
+2. What are the two options of RAM, disk and vcpu configuration you can have in running codespaces . ***(1 mark)*** __1. 8GB RAM, 2 Cores and 32GB Storage.  2. 16GB RAM, 4 Cores and 32 GB Storage__
 3. Why must we commit and sync our current work on source control? ***(1 mark)*** _To save the changes in Github repository.
 
 ## Exploring the Terminal
@@ -404,7 +404,7 @@ At the terminal, create a new directory called **myroot**, and run a instance of
 
 ***Questions:***
 
-1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __The files in the myroot directory are owned by the user codespace and the group codespace on the host virtual machine.__.
+1. Check the permission of the files created in myroot, what user and group is the files created in docker container on the host virtual machine? . ***(2 mark)*** __Users and__.
 2. Can you change the permission of the files to user codespace.  You will need this to be able to commit and get points for this question. ***(2 mark)***
 ```bash
 //use sudo and chown
